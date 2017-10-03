@@ -22,7 +22,7 @@ caffe.set_mode_gpu()
 #Size of images
 IMAGE_WIDTH = 227
 IMAGE_HEIGHT = 227
-
+TUTORIAL_PATH = '/home/ubuntu/deeplearning-cats-dogs-tutorial/'
 
 '''
 Image processing helper function
@@ -45,15 +45,15 @@ Reading mean image, caffe model and its weights
 '''
 #Read mean image
 mean_blob = caffe_pb2.BlobProto()
-with open('/home/ubuntu/deeplearning-cats-dogs-tutorial/input/mean.binaryproto') as f:
+with open(TUTORIAL_PATH + 'input/mean.binaryproto') as f:
     mean_blob.ParseFromString(f.read())
 mean_array = np.asarray(mean_blob.data, dtype=np.float32).reshape(
     (mean_blob.channels, mean_blob.height, mean_blob.width))
 
 
 #Read model architecture and trained model's weights
-net = caffe.Net('/home/ubuntu/deeplearning-cats-dogs-tutorial/caffe_models/caffe_model_2/caffenet_deploy_2.prototxt',
-                '/home/ubuntu/deeplearning-cats-dogs-tutorial/caffe_models/caffe_model_2/caffe_model_2_iter_10000.caffemodel',
+net = caffe.Net(TUTORIAL_PATH + 'caffe_models/caffe_model_2/caffenet_deploy_2.prototxt',
+                TUTORIAL_PATH + 'caffe_models/caffe_model_2/caffe_model_2_iter_10000.caffemodel',
                 caffe.TEST)
 
 #Define image transformers
